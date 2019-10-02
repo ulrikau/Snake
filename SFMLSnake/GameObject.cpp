@@ -17,8 +17,9 @@ Player::Player() {
 
     this->bodyTexture.loadFromFile("images/Body.png");
 
-    this->addBodyPiece(); //Add head
-    this->addBodyPiece(); //Add first piece of body
+    this->addBodyPiece(0, 0); //Add second piece of body
+    this->addBodyPiece(this->bodyTexture.getSize().x, 0); //Add first piece of body
+    this->addBodyPiece(this->bodyTexture.getSize().x * 2, 0); //Add head
 
     this->setDirection(RIGHT); //Starting direction for the snake
 }
@@ -27,9 +28,30 @@ Player::~Player() {
 }
 
 void Player::addBodyPiece() {
+    addBodyPiece(0, 0);
+}
+
+void Player::addBodyPiece(float x, float y) {
     sf::Sprite sprite(this->bodyTexture);
-    this->sprite.setOrigin(CELL_SIZE / 2, CELL_SIZE / 2); //Set origin to the middle of the body sprite
-    this->body.push_back(sprite);
+    sprite.setPosition(x, y);
+    //sprite.setOrigin(this->bodyTexture.getSize().x / 2, this->bodyTexture.getSize().y / 2); //Set origin to the middle of the body sprite
+    this->body.insert(this->body.begin(), sprite);
+}
+
+void Player::updateBodyPosition(float dx, float dy) {
+    /*for (int i = 0; i < this->body.size(); i++) {
+        this->body.at(i).setPosition(this->body.at(i).getPosition().x + dx, this->body.at(i).getPosition().y + dy);
+    }*/
+
+    //this->body.at(0).setPosition(this->body.at(i).getPosition().x + dx, this->body.at(i).getPosition().y + dy);
+
+    for (auto& part : this->body) {
+        part.setPosition(part.getPosition().x + dx, part.getPosition().y + dy);
+    }
+
+    /*for (sf::Sprite part : this->body) {
+        part.setPosition(part.getPosition().x + dx, part.getPosition().y + dy);
+    }*/
 }
 
 void Player::move(float dt) {
@@ -40,16 +62,21 @@ void Player::move(float dt) {
 
     switch (direction) {
         case LEFT:
-            this->body[0].setPosition(oldX - movement, oldY);
+            updateBodyPosition(-movement, 0);
+            //this->body[0].setPosition(oldX - movement, oldY);
             break;
         case RIGHT:
-            this->body[0].setPosition(oldX + movement, oldY);
+            updateBodyPosition(movement, 0);
+            /*this->body[0].setPosition(oldX + movement, oldY);
+            this->body[1].setPosition(body[1].getPosition().x + movement, oldY);*/
             break;
         case UP:
-            this->body[0].setPosition(oldX, oldY - movement);
+            updateBodyPosition(0, -movement);
+            //this->body[0].setPosition(oldX, oldY - movement);
             break;
         case DOWN:
-            this->body[0].setPosition(oldX, oldY + movement);
+            updateBodyPosition(0, movement);
+            //this->body[0].setPosition(oldX, oldY + movement);
             break;
         default:
             break;
@@ -61,19 +88,15 @@ void Player::setDirection(Direction newDir) {
     switch (newDir) {
         case LEFT:
             this->direction = newDir;
-            //this->sprite.setRotation(90);
             break;
         case RIGHT:
             this->direction = newDir;
-            //this->sprite.setRotation(-90);
             break;
         case UP:
             this->direction = newDir;
-            //this->sprite.setRotation(180);
             break;
         case DOWN:
             this->direction = newDir;
-            //this->sprite.setRotation(0);
             break;
         default:
             break;
@@ -98,7 +121,7 @@ bool Player::checkOutOfBounds() {
         outOfBounds = true;
     }
 
-    return outOfBounds;
+    return false;// outOfBounds;
 }
 
 /*-- FRUIT --*/

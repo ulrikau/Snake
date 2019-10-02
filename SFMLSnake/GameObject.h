@@ -26,7 +26,7 @@ public:
 /* Class for the player snake */
 class Player : public GameObject {
 private:
-    const unsigned int PLAYER_SPEED = CELL_SIZE * 4;
+    const unsigned int PLAYER_SPEED = CELL_SIZE * 3; //Speed per second
 
 public:
     sf::Texture bodyTexture;
@@ -37,6 +37,8 @@ public:
     ~Player();
 
     void addBodyPiece();
+    void addBodyPiece(float x, float y);
+    void updateBodyPosition(float dx, float dy);
     void move(float dt);
     void setDirection(Direction newDir);
     sf::Sprite getHead();
