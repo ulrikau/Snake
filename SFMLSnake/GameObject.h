@@ -17,13 +17,9 @@ protected:
     sf::Texture texture;
 
 public:
-    int x;
-    int y;
-
     sf::Sprite sprite;
 
     GameObject();
-    GameObject(int x, int y);
     ~GameObject();
 };
 
@@ -43,6 +39,7 @@ public:
     void addBodyPiece();
     void move(float dt);
     void setDirection(Direction newDir);
+    sf::Sprite getHead();
     bool checkOutOfBounds();
 };
 

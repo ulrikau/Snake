@@ -73,14 +73,12 @@ int main(int argc, char** argv) {
         if (!gameOver) {
             player->move(dt);
 
-            if (checkCollision(player->sprite.getGlobalBounds(), fruit->sprite.getGlobalBounds())) {
+            if (checkCollision(player->getHead().getGlobalBounds(), fruit->sprite.getGlobalBounds())) {
                 score++;
 
-                int randX = randomXCell(randomNumbers);
-                int randY = randomYCell(randomNumbers);
-                float newX = randX * CELL_SIZE;
-                float newY = randY * CELL_SIZE;
-                //text.setString("randX: " + std::to_string(randX) + "\n randY: " + std::to_string(randY) + "\n newX: " + std::to_string(newX) + "\n newY: " + std::to_string(newY));
+                float newX = randomXCell(randomNumbers) * CELL_SIZE;
+                float newY = randomYCell(randomNumbers) * CELL_SIZE;
+
                 fruit->setPosition(newX, newY);
             }
 
