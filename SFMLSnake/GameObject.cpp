@@ -39,19 +39,9 @@ void Player::addBodyPiece(float x, float y) {
 }
 
 void Player::updateBodyPosition(float dx, float dy) {
-    /*for (int i = 0; i < this->body.size(); i++) {
-        this->body.at(i).setPosition(this->body.at(i).getPosition().x + dx, this->body.at(i).getPosition().y + dy);
-    }*/
-
-    //this->body.at(0).setPosition(this->body.at(i).getPosition().x + dx, this->body.at(i).getPosition().y + dy);
-
     for (auto& part : this->body) {
         part.setPosition(part.getPosition().x + dx, part.getPosition().y + dy);
     }
-
-    /*for (sf::Sprite part : this->body) {
-        part.setPosition(part.getPosition().x + dx, part.getPosition().y + dy);
-    }*/
 }
 
 void Player::move(float dt) {
@@ -121,7 +111,7 @@ bool Player::checkOutOfBounds() {
         outOfBounds = true;
     }
 
-    return false;// outOfBounds;
+    return outOfBounds;
 }
 
 /*-- FRUIT --*/
