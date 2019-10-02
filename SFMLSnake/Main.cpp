@@ -90,7 +90,9 @@ int main(int argc, char** argv) {
         window.clear(sf::Color(125, 155, 224, 255));
         //window.draw(background);
         window.draw(fruit->sprite);
-        window.draw(player->body[0]);
+        for (int i = 0; i < player->body.size(); i++) {
+            window.draw(player->body[i]);
+        }
 
         if (gameOver) {
             text.setString("Game over! Score: " + std::to_string(score));
