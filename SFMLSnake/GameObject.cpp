@@ -45,32 +45,31 @@ void Player::updateBodyPosition(float dx, float dy) {
 }
 
 void Player::move(float dt) {
-    float oldX = body[0].getPosition().x;
-    float oldY = body[0].getPosition().y;
 
     float movement = PLAYER_SPEED * dt;
 
     switch (direction) {
         case LEFT:
-            updateBodyPosition(-movement, 0);
-            //this->body[0].setPosition(oldX - movement, oldY);
+            this->addBodyPiece(body.at(0).getPosition().x - movement, body.at(0).getPosition().y);
+            //updateBodyPosition(-movement, 0);
             break;
         case RIGHT:
-            updateBodyPosition(movement, 0);
-            /*this->body[0].setPosition(oldX + movement, oldY);
-            this->body[1].setPosition(body[1].getPosition().x + movement, oldY);*/
+            this->addBodyPiece(body.at(0).getPosition().x + movement, body.at(0).getPosition().y);
+            //updateBodyPosition(movement, 0);
             break;
         case UP:
-            updateBodyPosition(0, -movement);
-            //this->body[0].setPosition(oldX, oldY - movement);
+            this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y - movement);
+            //updateBodyPosition(0, -movement);
             break;
         case DOWN:
-            updateBodyPosition(0, movement);
-            //this->body[0].setPosition(oldX, oldY + movement);
+            this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y + movement);
+            //updateBodyPosition(0, movement);
             break;
         default:
             break;
     }
+
+    body.pop_back();
 }
 
 void Player::setDirection(Direction newDir) {
