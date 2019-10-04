@@ -21,7 +21,7 @@ Player::Player() {
     this->addBodyPiece(this->bodyTexture.getSize().x, 0); //Add first piece of body
     this->addBodyPiece(this->bodyTexture.getSize().x * 2, 0); //Add head
 
-    this->setDirection(RIGHT); //Starting direction for the snake
+    this->setDirection(Direction::RIGHT); //Starting direction for the snake
 }
 
 Player::~Player() {
@@ -49,19 +49,19 @@ void Player::move(float dt) {
     float movement = PLAYER_SPEED * dt;
 
     switch (direction) {
-        case LEFT:
+	case Direction::LEFT:
             this->addBodyPiece(body.at(0).getPosition().x - movement, body.at(0).getPosition().y);
             //updateBodyPosition(-movement, 0);
             break;
-        case RIGHT:
+        case Direction::RIGHT:
             this->addBodyPiece(body.at(0).getPosition().x + movement, body.at(0).getPosition().y);
             //updateBodyPosition(movement, 0);
             break;
-        case UP:
+        case Direction::UP:
             this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y - movement);
             //updateBodyPosition(0, -movement);
             break;
-        case DOWN:
+        case Direction::DOWN:
             this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y + movement);
             //updateBodyPosition(0, movement);
             break;
@@ -75,16 +75,16 @@ void Player::move(float dt) {
 void Player::setDirection(Direction newDir) {
 
     switch (newDir) {
-        case LEFT:
+        case Direction::LEFT:
             this->direction = newDir;
             break;
-        case RIGHT:
+        case Direction::RIGHT:
             this->direction = newDir;
             break;
-        case UP:
+        case Direction::UP:
             this->direction = newDir;
             break;
-        case DOWN:
+        case Direction::DOWN:
             this->direction = newDir;
             break;
         default:

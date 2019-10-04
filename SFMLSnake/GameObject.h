@@ -3,7 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "Constants.h"
 
-enum Direction
+enum class Direction
 {
     LEFT,
     RIGHT,
