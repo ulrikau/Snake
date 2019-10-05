@@ -26,7 +26,7 @@ public:
 /* Class for the player snake */
 class Player : public GameObject {
 private:
-    const unsigned int PLAYER_SPEED = CELL_SIZE * 3; //Speed per second
+	float timeSinceLastMove = 0; //Time in seconds since the last move
 
 public:
     sf::Texture bodyTexture;

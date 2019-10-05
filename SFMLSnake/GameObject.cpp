@@ -46,30 +46,37 @@ void Player::updateBodyPosition(float dx, float dy) {
 
 void Player::move(float dt) {
 
-    float movement = PLAYER_SPEED * dt;
+	timeSinceLastMove += dt;
+	float timestep = 1.f/20.f;// 1.f / (float)PLAYER_SPEED;
 
-    switch (direction) {
-	case Direction::LEFT:
-            this->addBodyPiece(body.at(0).getPosition().x - movement, body.at(0).getPosition().y);
-            //updateBodyPosition(-movement, 0);
-            break;
-        case Direction::RIGHT:
-            this->addBodyPiece(body.at(0).getPosition().x + movement, body.at(0).getPosition().y);
-            //updateBodyPosition(movement, 0);
-            break;
-        case Direction::UP:
-            this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y - movement);
-            //updateBodyPosition(0, -movement);
-            break;
-        case Direction::DOWN:
-            this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y + movement);
-            //updateBodyPosition(0, movement);
-            break;
-        default:
-            break;
-    }
+	if (timeSinceLastMove >= timestep) {
 
-    body.pop_back();
+		float movement = 1.f/2.f * (float)CELL_SIZE;
+
+		switch (direction) {
+		case Direction::LEFT:
+			this->addBodyPiece(body.at(0).getPosition().x - movement, body.at(0).getPosition().y);
+			//updateBodyPosition(-movement, 0);
+			break;
+		case Direction::RIGHT:
+			this->addBodyPiece(body.at(0).getPosition().x + movement, body.at(0).getPosition().y);
+			//updateBodyPosition(movement, 0);
+			break;
+		case Direction::UP:
+			this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y - movement);
+			//updateBodyPosition(0, -movement);
+			break;
+		case Direction::DOWN:
+			this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y + movement);
+			//updateBodyPosition(0, movement);
+			break;
+		default:
+			break;
+		}
+
+		body.pop_back();
+		timeSinceLastMove -= timestep;
+	}
 }
 
 void Player::setDirection(Direction newDir) {
