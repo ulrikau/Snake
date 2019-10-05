@@ -7,7 +7,7 @@ There are a number of things that could be done to improve this project.
 
 ### Base functionality
 
-* Move multiple times if more time has passed
+[comment]: # (* Move multiple times if more time has passed)
 * The snake grows when eating fruit
 * The snake collides with itself
 
