@@ -19,8 +19,7 @@ There are a number of things that could be done to improve this project.
 ### Refactoring
 
 * Move most of the content in Main.cpp to a Game class to more clearly show the flow of the game loop
-* Improve the encapsulation of data
-** Decrease direct accessing of variables in Player and Fruit
+* Improve the encapsulation of data (mainly decrease direct accessing of variables in Player and Fruit outside those classes)
 * Improve snake movement to be less fixed to a certain update rate 
 
 
