@@ -10,6 +10,13 @@ bool checkCollision(sf::FloatRect object1, sf::FloatRect object2) {
     return object1.intersects(object2);
 }
 
+sf::Vector2f getRandomPosition(std::uniform_int_distribution<int> randomX, std::uniform_int_distribution<int> randomY, std::mt19937 rand) {
+    float newX = randomX(rand) * (float)CELL_SIZE;
+    float newY = randomY(rand) * CELL_SIZE;
+
+    return sf::Vector2f(newX, newY);
+}
+
 int main(int argc, char** argv) {
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Snake");
@@ -76,10 +83,8 @@ int main(int argc, char** argv) {
             if (checkCollision(player->getHead().getGlobalBounds(), fruit->sprite.getGlobalBounds())) {
                 score++;
 
-                float newX = randomXCell(randomNumbers) * CELL_SIZE;
-                float newY = randomYCell(randomNumbers) * CELL_SIZE;
-
-                fruit->setPosition(newX, newY);
+                sf::Vector2f newPos = getRandomPosition(randomXCell, randomYCell, randomNumbers);
+                fruit->setPosition(newPos.x, newPos.y);
             }
 
             if (player->checkOutOfBounds()) {
