@@ -26,7 +26,9 @@ public:
 /* Class for the player snake */
 class Player : public GameObject {
 private:
+    const int BODY_PARTS_PER_CELL = 6;
 	float timeSinceLastMove = 0; //Time in seconds since the last move
+    int partsLeftToGrow = 0;
 
 public:
     sf::Texture bodyTexture;
@@ -40,6 +42,7 @@ public:
     void addBodyPiece(float x, float y);
     void updateBodyPosition(float dx, float dy);
     void move(float dt);
+    void grow();
     void setDirection(Direction newDir);
     sf::Sprite getHead();
     bool checkOutOfBounds();

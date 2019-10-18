@@ -83,10 +83,12 @@ int main(int argc, char** argv) {
             if (checkCollision(player->getHead().getGlobalBounds(), fruit->sprite.getGlobalBounds())) {
                 score++;
 
+                player->grow();
+
                 float newX = randomXCell(randomNumbers) * CELL_SIZE;
                 float newY = randomYCell(randomNumbers) * CELL_SIZE;
 
-                sf::Vector2f newPos = getRandomPosition(randomXCell, randomYCell, randomNumbers);
+                //sf::Vector2f newPos = getRandomPosition(randomXCell, randomYCell, randomNumbers);
 
                 fruit->setPosition(newX, newY);
             }

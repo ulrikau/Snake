@@ -17,9 +17,11 @@ Player::Player() {
 
     this->bodyTexture.loadFromFile("images/Body.png");
 
-    this->addBodyPiece(0, 0); //Add second piece of body
-    this->addBodyPiece(this->bodyTexture.getSize().x, 0); //Add first piece of body
-    this->addBodyPiece(this->bodyTexture.getSize().x * 2, 0); //Add head
+    int playerStartSize = 6;
+
+    for (int i = 0; i < playerStartSize; i++) {
+        this->addBodyPiece(this->bodyTexture.getSize().x / BODY_PARTS_PER_CELL * i, 0);
+    }
 
     this->setDirection(Direction::RIGHT); //Starting direction for the snake
 }
@@ -47,11 +49,11 @@ void Player::updateBodyPosition(float dx, float dy) {
 void Player::move(float dt) {
 
 	timeSinceLastMove += dt;
-	float timestep = 1.f/20.f;// 1.f / (float)PLAYER_SPEED;
+	float timestep = 1.f/60.f;// 1.f / (float)PLAYER_SPEED;
 
 	if (timeSinceLastMove >= timestep) {
 
-		float movement = 1.f/2.f * (float)CELL_SIZE;
+		float movement = 1.f/BODY_PARTS_PER_CELL * (float)CELL_SIZE;
 
 		switch (direction) {
 		case Direction::LEFT:
@@ -74,9 +76,18 @@ void Player::move(float dt) {
 			break;
 		}
 
-		body.pop_back();
+        if (partsLeftToGrow > 0) {
+            partsLeftToGrow--;
+        } else {
+            body.pop_back();
+        } 
+		
 		timeSinceLastMove -= timestep;
 	}
+}
+
+void Player::grow() {
+    partsLeftToGrow += BODY_PARTS_PER_CELL;
 }
 
 void Player::setDirection(Direction newDir) {
