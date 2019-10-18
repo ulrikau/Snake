@@ -10,16 +10,11 @@ GameObject::~GameObject() {
 
 /*-- PLAYER --*/
 Player::Player() {
-    /*this->texture.loadFromFile("images/Head.png");
-    this->sprite.setTexture(this->texture);
-    this->sprite.setOrigin(CELL_SIZE / 2, CELL_SIZE / 2);
-    this->sprite.setPosition(CELL_SIZE / 2, CELL_SIZE / 2);*/
+    //this->texture.loadFromFile("images/Head.png");
 
     this->bodyTexture.loadFromFile("images/Body.png");
 
-    int playerStartSize = 6;
-
-    for (int i = 0; i < playerStartSize; i++) {
+    for (int i = 0; i < PLAYER_START_SIZE; i++) {
         this->addBodyPiece(this->bodyTexture.getSize().x / BODY_PARTS_PER_CELL * i, 0);
     }
 
@@ -27,10 +22,6 @@ Player::Player() {
 }
 
 Player::~Player() {
-}
-
-void Player::addBodyPiece() {
-    addBodyPiece(0, 0);
 }
 
 void Player::addBodyPiece(float x, float y) {
@@ -49,7 +40,7 @@ void Player::updateBodyPosition(float dx, float dy) {
 void Player::move(float dt) {
 
 	timeSinceLastMove += dt;
-	float timestep = 1.f/60.f;// 1.f / (float)PLAYER_SPEED;
+	float timestep = 1.f / PLAYER_SPEED;
 
 	if (timeSinceLastMove >= timestep) {
 
@@ -58,19 +49,15 @@ void Player::move(float dt) {
 		switch (direction) {
 		case Direction::LEFT:
 			this->addBodyPiece(body.at(0).getPosition().x - movement, body.at(0).getPosition().y);
-			//updateBodyPosition(-movement, 0);
 			break;
 		case Direction::RIGHT:
 			this->addBodyPiece(body.at(0).getPosition().x + movement, body.at(0).getPosition().y);
-			//updateBodyPosition(movement, 0);
 			break;
 		case Direction::UP:
 			this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y - movement);
-			//updateBodyPosition(0, -movement);
 			break;
 		case Direction::DOWN:
 			this->addBodyPiece(body.at(0).getPosition().x, body.at(0).getPosition().y + movement);
-			//updateBodyPosition(0, movement);
 			break;
 		default:
 			break;

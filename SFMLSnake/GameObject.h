@@ -26,6 +26,8 @@ public:
 /* Class for the player snake */
 class Player : public GameObject {
 private:
+    const int PLAYER_START_SIZE = 6;
+    const int PLAYER_SPEED = 60; //Number of movements per second
     const int BODY_PARTS_PER_CELL = 6;
 	float timeSinceLastMove = 0; //Time in seconds since the last move
     int partsLeftToGrow = 0;
@@ -38,7 +40,6 @@ public:
     Player();
     ~Player();
 
-    void addBodyPiece();
     void addBodyPiece(float x, float y);
     void updateBodyPosition(float dx, float dy);
     void move(float dt);

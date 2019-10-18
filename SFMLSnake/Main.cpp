@@ -62,16 +62,16 @@ int main(int argc, char** argv) {
             }
 
             if (event.type == sf::Event::EventType::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Left) {
+                if (event.key.code == sf::Keyboard::Left && player->direction != Direction::RIGHT) {
                     player->setDirection(Direction::LEFT);
                 }
-                if (event.key.code == sf::Keyboard::Right) {
+                if (event.key.code == sf::Keyboard::Right && player->direction != Direction::LEFT) {
                     player->setDirection(Direction::RIGHT);
                 }
-                if (event.key.code == sf::Keyboard::Up) {
+                if (event.key.code == sf::Keyboard::Up && player->direction != Direction::DOWN) {
                     player->setDirection(Direction::UP);
                 }
-                if (event.key.code == sf::Keyboard::Down) {
+                if (event.key.code == sf::Keyboard::Down && player->direction != Direction::UP) {
                     player->setDirection(Direction::DOWN);
                 }
             }
