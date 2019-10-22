@@ -8,7 +8,6 @@ There are a number of things that could be done to improve this project.
 ### Base functionality
 
 [comment]: # (* Move multiple times if more time has passed)
-* The snake grows when eating fruit
 * The snake collides with itself
 
 ### Extra features
